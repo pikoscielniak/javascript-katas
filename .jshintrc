@@ -3,6 +3,7 @@
   "esnext": true,
   "undef": true,
   "unused": true,
+  "expr": true,
   "node": true,
   "globals": {
     "describe": true,
