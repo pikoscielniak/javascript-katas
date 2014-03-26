@@ -32,4 +32,11 @@ describe("exerciases chapter 1", function () {
       expect(result).to.equal(1);
     });
   });
+
+  describe("threeNumbersAscendingSort", function () {
+    var threeNumbersSort;
+    beforeEach(function () {
+      threeNumbersSort = require('../../ch1/exercise').threeNumbersAscendingSort;
+    });
+  });
 });
