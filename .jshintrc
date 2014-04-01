@@ -6,6 +6,8 @@
   "expr": true,
   "node": true,
   "globals": {
+    "document": true,
+    "window": true,
     "describe": true,
     "it": true,
     "beforeEach": true,
