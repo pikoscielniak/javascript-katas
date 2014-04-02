@@ -221,6 +221,40 @@ describe("linkedList", function () {
     });
   });
   describe("insertAt", function () {
+    it("should exists", function () {
+      expect(linkedList.insertAt).to.be.ok;
+    });
+
+    it("when index is out of range should throw excpetion", function () {
+      var fn = function () {
+        linkedList.insertAt(2, {});
+      };
+      expect(fn).to.throw("Out of range");
+    });
+
+    it("insertAt with 0 index should set first element", function () {
+      var element = {};
+      linkedList.insertAt(0, element);
+
+      expect(linkedList.getCount()).to.equal(1);
+      expect(linkedList.removeAtBeginning()).to.equal(element);
+    });
+
+
+    it("should insert element at specific index", function () {
+      var element = {};
+      linkedList.addAtBeginning({});
+      linkedList.addAtBeginning({});
+      expect(linkedList.getCount()).to.equal(2);
+
+      linkedList.insertAt(1, element);
+
+      expect(linkedList.getCount()).to.equal(3);
+
+      expect(linkedList.removeAtBeginning()).not.to.equal(element);
+      expect(linkedList.removeAtBeginning()).to.equal(element);
+
+    });
   });
   describe("removeAt", function () {
   });

@@ -105,6 +105,33 @@ function LinkedList() {
     return length;
   }
 
+  function isIndexOutOfRange(index) {
+    return index < 0 || index > getCount();
+  }
+
+  function insertAt(index, value) {
+    if (isIndexOutOfRange(index)) {
+      throw "Out of range";
+    }
+    var current = first;
+    var i = 0;
+    while (i !== index) {
+      i++;
+      current = current.next;
+    }
+    if (current) {
+      var newNode = createNode(value);
+      newNode.prev = current.prev;
+      current.prev.next = newNode;
+      newNode.next = current;
+      current.prev = newNode;
+    } else {
+      first = last = createNode(value);
+    }
+
+    length++;
+  }
+
   return {
     addAtBeginning: addAtBeginning,
     removeAtBeginning: removeAtBeginning,
@@ -114,7 +141,8 @@ function LinkedList() {
     getLast: getLast,
     getFirst: getFirst,
     removeAtEnd: removeAtEnd,
-    reverseEach: reverseEach
+    reverseEach: reverseEach,
+    insertAt: insertAt
   };
 }
 module.exports = LinkedList;
