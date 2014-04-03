@@ -119,13 +119,31 @@ function LinkedList() {
     return current;
   }
 
+  function isFirst(current) {
+    return current === first;
+  }
+
+  function isLast(current) {
+    return current === last;
+  }
+
   function insertElementAtIndex(current, value) {
     if (current) {
       var newNode = createNode(value);
-      newNode.prev = current.prev;
-      current.prev.next = newNode;
-      newNode.next = current;
-      current.prev = newNode;
+      if (isFirst(current)) {
+        first = newNode;
+        current.prev = newNode;
+      }
+      if (current === last) {
+        last = newNode;
+        current.next = newNode;
+      }
+      if (!isFirst(current) && !isLast(current)) {
+        newNode.prev = current.prev;
+        current.prev.next = newNode;
+        newNode.next = current;
+        current.prev = newNode;
+      }
     } else {
       first = last = createNode(value);
     }

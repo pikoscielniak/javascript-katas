@@ -232,7 +232,7 @@ describe("linkedList", function () {
       expect(fn).to.throw("Out of range");
     });
 
-    it("insertAt with 0 index should set first element", function () {
+    it("with 0 index should set first element", function () {
       var element = {};
       linkedList.insertAt(0, element);
 
@@ -242,19 +242,58 @@ describe("linkedList", function () {
 
 
     it("should insert element at specific index", function () {
-      var element = {};
-      linkedList.addAtBeginning({});
-      linkedList.addAtBeginning({});
+      var element = "testIns";
+      linkedList.addAtBeginning("test1");
+      linkedList.addAtBeginning("test2");
       expect(linkedList.getCount()).to.equal(2);
 
       linkedList.insertAt(1, element);
 
       expect(linkedList.getCount()).to.equal(3);
-
       expect(linkedList.removeAtBeginning()).not.to.equal(element);
       expect(linkedList.removeAtBeginning()).to.equal(element);
 
     });
+
+    it("should insert element as last", function () {
+      var element = {};
+      linkedList.addAtBeginning({});
+
+      linkedList.insertAt(1, element);
+
+      expect(linkedList.getCount()).to.equal(2);
+      expect(linkedList.getLast()).to.equal(element);
+    });
+
+
+    it("should insert element as first", function () {
+      var element = {};
+      linkedList.addAtBeginning({});
+      linkedList.insertAt(0, element);
+
+      expect(linkedList.getCount()).to.equal(2);
+      expect(linkedList.getFirst()).to.equal(element);
+    });
+
+
+    it("after insertion elements should be in proper order", function () {
+      var element = "ins";
+      var elems = [
+        "1",
+        element,
+        "2",
+        "3"
+      ];
+      linkedList.addAtBeginning(elems[3]);
+      linkedList.addAtBeginning(elems[2]);
+      linkedList.addAtBeginning(elems[0]);
+      linkedList.insertAt(1, element);
+
+      linkedList.each(function (elem, index) {
+        expect(elem).to.equal(elems[index]);
+      });
+    });
+
   });
   describe("removeAt", function () {
     it("should exists", function () {
@@ -279,16 +318,43 @@ describe("linkedList", function () {
     it("should remove element in the middle", function () {
       var element = {};
 
-      linkedList.addAtBeginning({});
+      var elems = [
+        {},
+        {}
+      ];
+
+      linkedList.addAtBeginning(elems[0]);
       linkedList.addAtBeginning(element);
-      linkedList.addAtBeginning({});
+      linkedList.addAtBeginning(elems[1]);
       expect(linkedList.getCount()).to.equal(3);
 
       var removedElement = linkedList.removeAt(1);
 
       expect(removedElement).to.equal(element);
       expect(linkedList.getCount()).to.equal(2);
-      expect(linkedList.getFirst()).to.be.ok;
+      expect(linkedList.getFirst()).to.equal(elems[1]);
+      expect(linkedList.getLast()).to.equal(elems[0]);
+
+    });
+
+    it("after remove elements should be in proper order", function () {
+      var element = {};
+
+      var elems = [
+        {},
+        {}
+      ];
+
+      linkedList.addAtBeginning(elems[0]);
+      linkedList.addAtBeginning(element);
+      linkedList.addAtBeginning(elems[1]);
+
+      linkedList.removeAt(1);
+
+      linkedList.each(function (elem, index) {
+        expect(elem).to.equal(elems[elems.length - index - 1]);
+      });
+
     });
   });
 });
