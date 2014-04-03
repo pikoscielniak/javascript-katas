@@ -257,5 +257,38 @@ describe("linkedList", function () {
     });
   });
   describe("removeAt", function () {
+    it("should exists", function () {
+      expect(linkedList.removeAt).to.be.ok;
+    });
+    it("when index is out of range should throw excpetion", function () {
+      var fn = function () {
+        linkedList.removeAt(2);
+      };
+      expect(fn).to.throw("Out of range");
+    });
+    it("should remove first element when index 0 is passed", function () {
+      var element = {};
+      linkedList.addAtBeginning(element);
+      expect(linkedList.getCount()).to.equal(1);
+
+      var removedElement = linkedList.removeAt(0);
+
+      expect(removedElement).to.equal(element);
+      expect(linkedList.getCount()).to.equal(0);
+    });
+    it("should remove element in the middle", function () {
+      var element = {};
+
+      linkedList.addAtBeginning({});
+      linkedList.addAtBeginning(element);
+      linkedList.addAtBeginning({});
+      expect(linkedList.getCount()).to.equal(3);
+
+      var removedElement = linkedList.removeAt(1);
+
+      expect(removedElement).to.equal(element);
+      expect(linkedList.getCount()).to.equal(2);
+      expect(linkedList.getFirst()).to.be.ok;
+    });
   });
 });

@@ -109,16 +109,17 @@ function LinkedList() {
     return index < 0 || index > getCount();
   }
 
-  function insertAt(index, value) {
-    if (isIndexOutOfRange(index)) {
-      throw "Out of range";
-    }
+  function getElementByIndex(index) {
     var current = first;
     var i = 0;
     while (i !== index) {
       i++;
       current = current.next;
     }
+    return current;
+  }
+
+  function insertElementAtIndex(current, value) {
     if (current) {
       var newNode = createNode(value);
       newNode.prev = current.prev;
@@ -128,8 +129,40 @@ function LinkedList() {
     } else {
       first = last = createNode(value);
     }
+  }
+
+  function insertAt(index, value) {
+    if (isIndexOutOfRange(index)) {
+      throw "Out of range";
+    }
+    var current = getElementByIndex(index);
+    insertElementAtIndex(current, value);
 
     length++;
+  }
+
+  function removeAt(index) {
+    if (isIndexOutOfRange(index)) {
+      throw "Out of range";
+    }
+    var current = getElementByIndex(index);
+    if (current === first) {
+      first = current.next;
+      if (current.next) {
+        current.next.prev = null;
+      }
+    }
+    if (current === last) {
+      last = current.prev;
+      if (current.prev) {
+        current.prev.next = null;
+      }
+    } else {
+      current.prev.next = current.next;
+      current.next.prev = current.prev;
+    }
+    length--;
+    return current.item;
   }
 
   return {
@@ -142,7 +175,8 @@ function LinkedList() {
     getFirst: getFirst,
     removeAtEnd: removeAtEnd,
     reverseEach: reverseEach,
-    insertAt: insertAt
+    insertAt: insertAt,
+    removeAt: removeAt
   };
 }
 module.exports = LinkedList;
