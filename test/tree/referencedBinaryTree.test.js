@@ -1,4 +1,4 @@
-var BinaryTree = require('../../tree/referencedBinaryTree');
+var binaryTree = require('../../tree/referencedBinaryTree');
 var expect = require('chai').expect;
 
 describe("listOfListBinaryTree", function () {
@@ -9,11 +9,11 @@ describe("listOfListBinaryTree", function () {
 
   beforeEach(function () {
     rootValue = "rootKey";
-    root = new BinaryTree(rootValue);
+    root = binaryTree(rootValue);
   });
 
   it("should exists", function () {
-    expect(BinaryTree).to.be.ok;
+    expect(binaryTree).to.be.ok;
   });
 
   describe("constructor", function () {
@@ -107,7 +107,7 @@ describe("listOfListBinaryTree", function () {
 
   describe("setLeftChild", function () {
     it("should set left child", function () {
-      var leftChild = new BinaryTree({});
+      var leftChild = binaryTree({});
 
       root.setLeftChild(leftChild);
 
@@ -117,7 +117,7 @@ describe("listOfListBinaryTree", function () {
 
   describe("setRightChild", function () {
     it("should set right child", function () {
-      var rightChild = new BinaryTree({});
+      var rightChild = binaryTree({});
 
       root.setRightChild(rightChild);
 
