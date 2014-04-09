@@ -5,9 +5,9 @@ function createBinaryTree(root) {
 }
 
 function insertLeft(root, newBranch) {
-  var tree = root.pop(1);
-  if (tree.length > 1) {
-    root.splice(1, 0, [newBranch, tree, []]);
+  var t = root.pop(1);
+  if (t.length > 1) {
+    root.splice(1, 0, [newBranch, t, []]);
   } else {
     root.splice(1, 0, [newBranch, [], []]);
   }
@@ -17,9 +17,9 @@ function insertLeft(root, newBranch) {
 function insertRight(root, newBranch) {
   var t = root.pop(2);
   if (t.length > 1) {
-    root.splice(2, [newBranch, [], t]);
+    root.splice(2, 0, [newBranch, [], t]);
   } else {
-    root.splice(2, [newBranch, [], []]);
+    root.splice(2, 0, [newBranch, [], []]);
   }
   return root;
 }
