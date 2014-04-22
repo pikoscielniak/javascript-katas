@@ -18,5 +18,11 @@ describe("expressionEvaluator", function () {
       var result = expressionEvaluator.evaluate(tree);
       expect(result).to.equal(45);
     });
+
+    it("should evaluate expression ( 3 + ( 4 * 5 ) ) and return 23", function () {
+      var tree = expressionParser.buildParseTree('( 3 + ( 4 * 5 ) )');
+      var result = expressionEvaluator.evaluate(tree);
+      expect(result).to.equal(23);
+    });
   });
 });
