@@ -1,13 +1,11 @@
 "use strict";
 
-function preorder(root) {
+function preorder(root, func) {
   if (root) {
-    var result = root.getValue() + " ";
-    result += preorder(root.getLeftChild()) + " ";
-    result += preorder(root.getRightChild()) + " ";
-    return result.trim();
+    func(root);
+    preorder(root.getLeftChild(), func);
+    preorder(root.getRightChild(), func);
   }
-  return "";
 }
 
 module.exports.preorder = preorder;

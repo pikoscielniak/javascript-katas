@@ -23,9 +23,12 @@ describe("treeTraversals", function () {
 
   describe("preorder", function () {
     it("should return '1 2 3 4 5 6 7'", function () {
-      var result = treeTraversals.preorder(root);
+      var result = [];
+      treeTraversals.preorder(root, function (elem) {
+        result.push(elem.getValue());
+      });
 
-      expect(result).to.equal("1 2 3 4 5 6 7");
+      expect(result.join(" ")).to.equal("1 2 3 4 5 6 7");
     });
 
     it("should return '1 2 3 4 5 6 7 8 9'", function () {
@@ -37,9 +40,12 @@ describe("treeTraversals", function () {
       root.getRightChild().getRightChild().setValue("9");
 
 
-      var result = treeTraversals.preorder(root);
+      var result = [];
+      treeTraversals.preorder(root, function (elem) {
+        result.push(elem.getValue());
+      });
 
-      expect(result).to.equal("1 2 3 4 5 6 7 8 9");
+      expect(result.join(" ")).to.equal("1 2 3 4 5 6 7 8 9");
     });
   });
 });
