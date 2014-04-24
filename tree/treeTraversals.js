@@ -8,4 +8,13 @@ function preorder(root, func) {
   }
 }
 
+function postorder(root, func) {
+  if (root) {
+    postorder(root.getLeftChild(), func);
+    postorder(root.getRightChild(), func);
+    func(root);
+  }
+}
+
 module.exports.preorder = preorder;
+module.exports.postorder = postorder;
