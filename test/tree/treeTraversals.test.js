@@ -100,4 +100,54 @@ describe("treeTraversals", function () {
       expect(result.join(" ")).to.equal("1 2 3 4 5 6 7 8 9");
     });
   });
+
+  describe("inorder", function () {
+
+    function createSmallTree() {
+      var root = binaryTree("4");
+      root.insertLeft("2");
+      root.insertRight("6");
+      root.getLeftChild().insertLeft("1");
+      root.getLeftChild().insertRight("3");
+
+      root.getRightChild().insertLeft("5");
+      root.getRightChild().insertRight("7");
+      return root;
+    }
+
+    function createBiggerTree() {
+      var root = binaryTree("6");
+      root.insertLeft("4");
+      root.insertRight("8");
+      root.getLeftChild().insertLeft("2");
+      root.getLeftChild().insertRight("5");
+      root.getRightChild().insertLeft("7");
+      root.getRightChild().insertRight("9");
+      root.getLeftChild().getLeftChild().insertLeft("1");
+      root.getLeftChild().getLeftChild().insertRight("3");
+
+      return root;
+    }
+
+    it("should return '1 2 3 4 5 6 7'", function () {
+      var result = [];
+      var root = createSmallTree();
+      treeTraversals.inorder(root, function (elem) {
+        result.push(elem.getValue());
+      });
+
+      expect(result.join(" ")).to.equal("1 2 3 4 5 6 7");
+    });
+
+    it("should return '1 2 3 4 5 6 7 8 9'", function () {
+      var root = createBiggerTree();
+
+      var result = [];
+      treeTraversals.inorder(root, function (elem) {
+        result.push(elem.getValue());
+      });
+
+      expect(result.join(" ")).to.equal("1 2 3 4 5 6 7 8 9");
+    });
+  });
 });
